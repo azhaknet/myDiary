@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LockSettingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/_8sdp"
+        android:divider="@android:drawable/divider_horizontal_textfield"
+        android:gravity="center|top"
+        android:layoutDirection="rtl"
+        android:orientation="vertical"
+        android:showDividers="middle|end"
+        android:weightSum="24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <CheckBox
+            android:id="@+id/lockedOn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:layout_weight="1"
+            android:checked="false"
+            android:gravity="center"
+            android:layoutDirection="locale"
+            android:text="قفل امنیتی"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/_16ssp" />
+
+        <TextView
+            android:id="@+id/passCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:gravity="center"
+            android:layoutDirection="locale"
+            android:text="رمز عددی"
+            android:textAlignment="textStart"
+            android:textColor="#6A6A6A"
+            android:textSize="@dimen/_16ssp" />
+
+        <TextView
+            android:id="@+id/pattern"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:gravity="center"
+            android:layoutDirection="locale"
+            android:text="الگو"
+            android:textAlignment="textStart"
+            android:textColor="#6A6A6A"
+            android:textSize="@dimen/_16ssp" />
+
+        <CheckBox
+            android:id="@+id/fingerPrint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:gravity="center"
+            android:layoutDirection="locale"
+            android:text="فعال سازی اثر انگشت"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/_16ssp" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
