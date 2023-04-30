@@ -72,4 +72,9 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="lib_name">PatternLockView</string>
+    <string name="message_pattern_dot_added">Dot added to pattern</string>
+    <string name="message_pattern_started">Pattern drawing started</string>
+    <string name="message_pattern_detected">Pattern drawing completed</string>
+    <string name="message_pattern_cleared">Pattern cleared</string>
 </resources>

@@ -15,7 +15,7 @@
         android:layoutDirection="rtl"
         android:orientation="vertical"
         android:showDividers="middle|end"
-        android:weightSum="24"
+        android:weightSum="40"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,20 +35,6 @@
             android:textSize="@dimen/_16ssp" />
 
         <TextView
-            android:id="@+id/passCode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_8sdp"
-            android:layout_weight="1"
-            android:enabled="false"
-            android:gravity="center"
-            android:layoutDirection="locale"
-            android:text="رمز عددی"
-            android:textAlignment="textStart"
-            android:textColor="#6A6A6A"
-            android:textSize="@dimen/_16ssp" />
-
-        <TextView
             android:id="@+id/pattern"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,6 +44,34 @@
             android:gravity="center"
             android:layoutDirection="locale"
             android:text="الگو"
+            android:textAlignment="textStart"
+            android:textColor="#6A6A6A"
+            android:textSize="@dimen/_16ssp" />
+
+        <TextView
+            android:id="@+id/passCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:gravity="center"
+            android:layoutDirection="locale"
+            android:text="رمز عبور"
+            android:textAlignment="textStart"
+            android:textColor="#6A6A6A"
+            android:textSize="@dimen/_16ssp" />
+
+        <TextView
+            android:id="@+id/passWord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:gravity="center"
+            android:layoutDirection="locale"
+            android:text="کلمه عبور"
             android:textAlignment="textStart"
             android:textColor="#6A6A6A"
             android:textSize="@dimen/_16ssp" />

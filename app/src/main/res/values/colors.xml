@@ -12,4 +12,11 @@
     <color name="light_blue_A200">#FF40C4FF</color>
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
+    <color name="colorPrimary">#795548</color>
+    <color name="colorPrimaryDark">#5D4037</color>
+    <color name="colorPrimaryDarkest">#3E2723</color>
+    <color name="colorAccent">#009688</color>
+    <color name="pomegranate">#f4511e</color>
+    <color name="greyish">#aaa8a8</color>
+    <color name="mine_shaft">#303030</color>
 </resources>

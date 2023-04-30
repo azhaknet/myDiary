@@ -6,26 +6,108 @@
     android:layout_height="match_parent"
     tools:context=".SecurityLockActivity">
 
-    <com.kevalpatel.passcodeview.PinView
-        android:id="@+id/pin_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:dividerColor="@color/design_default_color_primary_dark"
-        app:fingerprintDefaultText="Scan your finger to unlock application"
-        app:fingerprintEnable="true"
-        app:fingerprintTextColor="@color/biometric_error_color"
-        app:fingerprintTextSize="@dimen/_35sdp"
-        app:layout_constraintBottom_toTopOf="@+id/submit_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@android:color/white" />
-
-    <Button
-        android:id="@+id/submit_button"
+    <TextView
+        android:id="@+id/guidetv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_margin="@dimen/_8sdp"
+        android:text="لطفا رمز خود را وارد کنید"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ir.derasat.mydiary.PatternLockView
+        android:id="@+id/patter_lock_view"
+        android:layout_width="@dimen/_280sdp"
+        android:layout_height="@dimen/_280sdp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/_60sdp"
+        app:aspectRatio="square"
+        app:aspectRatioEnabled="true"
+        app:correctStateColor="#009688"
+        app:dotAnimationDuration="150"
+        app:dotCount="3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:normalStateColor="@color/black"
+        app:wrongStateColor="#E53935" />
+
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ادامه"
+        android:layout_margin="@dimen/_16sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/check_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="تایید"
+        android:visibility="gone"
+        android:layout_margin="@dimen/_16sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/passLy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16sdp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guidetv1">
+
+        <EditText
+            android:id="@+id/firstPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:ems="10"
+            android:hint="رمز"
+            android:inputType="number|numberPassword|numberSigned"
+            android:maxLength="4" />
+
+        <EditText
+            android:id="@+id/secondPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:ems="10"
+            android:hint="تکرار رمز"
+            android:inputType="number|numberPassword|numberSigned"
+            android:maxLength="4" />
+
+        <Spinner
+            android:id="@+id/SecurityQ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp" />
+
+        <EditText
+            android:id="@+id/SecurityA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:ems="10"
+            android:hint="پاسخ سوال امنیتی"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:text="پاسخ خود را به یاد داشته باشید" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
