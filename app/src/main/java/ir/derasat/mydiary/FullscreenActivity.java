@@ -46,8 +46,17 @@ public class FullscreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(FullscreenActivity.this, LockSettingActivity.class);
-                startActivity(intent);
+                Intent intent;
+                if (islocked) {
+                    intent = new Intent(FullscreenActivity.this, LockActivity.class);
+                    intent.putExtra("finger", fingerEnbl);
+                    startActivity(intent);
+                }
+                else {
+                    intent = new Intent(FullscreenActivity.this,LockSettingActivity.class);
+                    startActivity(intent);
+                }
+
                 finish();
             }
         }, 3000); //Delay for 2 seconds (2000 milliseconds)
