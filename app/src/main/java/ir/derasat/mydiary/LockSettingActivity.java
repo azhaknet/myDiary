@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -18,6 +19,7 @@ public class LockSettingActivity extends AppCompatActivity {
     boolean isSet;
     boolean islocked;
     boolean fingerEnbl;
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +30,12 @@ public class LockSettingActivity extends AppCompatActivity {
         TextView passWTv =findViewById(R.id.passWord);
         TextView patternTv =findViewById(R.id.pattern);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("my_prefs", MODE_PRIVATE);
+        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.M)
+            finger.setVisibility(View.VISIBLE);
+        else
+            finger.setVisibility(View.GONE);
+
+        sharedPreferences = getSharedPreferences("my_prefs", MODE_PRIVATE);
         islocked = sharedPreferences.getBoolean("LockEnabled", false);
         fingerEnbl =sharedPreferences.getBoolean("fingerEnabled",false);
         isSet =sharedPreferences.getBoolean("lockSet",false);
@@ -113,11 +120,9 @@ public class LockSettingActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 fingerEnbl=isChecked;
-                isSet=fingerEnbl;
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 if (isChecked){
                     editor.putBoolean("fingerEnabled", fingerEnbl);
-                    editor.putBoolean("lockSet", isSet);
                 }else{
                     editor.putBoolean("fingerEnabled", fingerEnbl);
 
@@ -136,5 +141,11 @@ public class LockSettingActivity extends AppCompatActivity {
             super.onBackPressed();    
         }
         
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isSet=sharedPreferences.getBoolean("lockSet",false);
     }
 }

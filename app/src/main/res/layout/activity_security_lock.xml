@@ -10,9 +10,9 @@
         android:id="@+id/guidetv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_8sdp"
+        android:layout_margin="@dimen/_10sdp"
         android:text="لطفا رمز خود را وارد کنید"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -103,10 +103,10 @@
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_8sdp"
-            android:text="پاسخ خود را به یاد داشته باشید" />
+            android:text="سوال و پاسخ خود را به یاد داشته باشید" />
 
     </LinearLayout>
 

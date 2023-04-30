@@ -9,6 +9,8 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -43,6 +45,18 @@ public class SecurityLockActivity extends AppCompatActivity {
         Spinner sqs=findViewById(R.id.SecurityQ);
         EditText sae=findViewById(R.id.SecurityA);
         patternLockView.getPattern().toArray();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, new String[]{"What is your favorite color?", "What is your mother's maiden name?", "What is the name of your first pet?",
+                "What is the name of your first school?",
+                "What is your favorite food?",
+                "What is the name of the city where you were born?",
+                "What is your favorite movie?",
+                "What is your favorite hobby?",
+                "What is the name of your favorite teacher?",
+                "What is your favorite sports team?",
+                "What is your mother's middle name?"});
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sqs.setAdapter(adapter);
+
 
         switch (Type){
             case "p":
@@ -101,6 +115,7 @@ public class SecurityLockActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(sae.getText().toString())){
                     sae.setError("پاسخ امنیتی نمی تواند خالی باشد");
                 }else {
+
                     switch (Type) {
                         case "p":
                             secondPass=PatternLockUtils.patternToString(patternLockView,patternLockView.getPattern());
@@ -115,6 +130,7 @@ public class SecurityLockActivity extends AppCompatActivity {
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("pattern", PatternLockUtils.patternToSha256(patternLockView,patternLockView.getPattern()));
                                 editor.putString("passType", "p");
+                                editor.putString("securityQuestion", encryptPass(sqs.getSelectedItem().toString()));
                                 editor.putString("securityAnswer", encryptPass(sae.getText().toString()));
                                 editor.putBoolean("lockSet", true);
                                 editor.apply();
@@ -138,6 +154,7 @@ public class SecurityLockActivity extends AppCompatActivity {
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("passcode", encryptPass(firstPass));
                                     editor.putString("passType", "pc");
+                                    editor.putString("securityQuestion", encryptPass(sqs.getSelectedItem().toString()));
                                     editor.putString("securityAnswer", encryptPass(sae.getText().toString()));
                                     editor.putBoolean("lockSet", true);
                                     editor.apply();
@@ -162,6 +179,7 @@ public class SecurityLockActivity extends AppCompatActivity {
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("password", encryptPass(firstPass));
                                     editor.putString("passType", "pw");
+                                    editor.putString("securityQuestion", encryptPass(sqs.getSelectedItem().toString()));
                                     editor.putString("securityAnswer", encryptPass(sae.getText().toString()));
                                     editor.putBoolean("lockSet", true);
                                     editor.apply();

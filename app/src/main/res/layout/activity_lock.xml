@@ -1,16 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="خوش آمدید"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_34ssp" />
+
+    <LinearLayout
+        android:id="@+id/passwordLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16sdp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_16sdp"
+            android:ems="10"
+            android:hint="کلمه عبور خود را وارد کنید"
+            android:inputType="textPassword"
+            android:maxLength="16" />
+
+        <Button
+            android:id="@+id/goBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="تایید"
+            android:textSize="@dimen/_14ssp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pinLay"
+        android:layout_width="@dimen/_280sdp"
+        android:layout_height="@dimen/_300sdp"
+        android:layout_margin="@dimen/_16sdp"
+        android:layout_marginBottom="0dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ir.derasat.mydiary.pin.IndicatorDots
+            android:id="@+id/indicatorDots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_16sdp"
+
+            android:layout_weight="1" />
+
+        <ir.derasat.mydiary.pin.PinLockView
+            android:id="@+id/pinLockView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_weight="5"
+            app:keypadButtonSize="@dimen/_60sdp"
+            app:keypadDeleteButtonSize="@dimen/_28sdp"
+            app:keypadTextColor="@color/black"
+            app:keypadTextSize="@dimen/_24sdp" />
+
+
+    </LinearLayout>
+
+    <ir.derasat.mydiary.PatternLockView
+        android:id="@+id/patter_lock_view"
+        android:layout_width="@dimen/_280sdp"
+        android:layout_height="@dimen/_280sdp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:visibility="visible"
+        app:aspectRatio="square"
+        app:aspectRatioEnabled="true"
+        app:correctStateColor="#008758"
+        app:dotAnimationDuration="150"
+        app:dotCount="3"
+        app:normalStateColor="@color/black"
+        app:wrongStateColor="#B71C1C" />
+
+    <TextView
+        android:id="@+id/forgetPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8sdp"
+
+        android:text="رمز عبور خود را فراموش کرده اید؟"
+        android:textColor="#0282C1"
+        android:textSize="@dimen/_13ssp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/fingerprint_icon"
-        android:layout_width="@dimen/_70sdp"
-        android:layout_height="@dimen/_70sdp"
+        android:layout_width="@dimen/_65sdp"
+        android:layout_height="@dimen/_65sdp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        app:srcCompat="?android:attr/fingerprintAuthDrawable" />
+        android:layout_marginTop="@dimen/_20sdp"
+        app:srcCompat="@drawable/baseline_fingerprint_24" />
 
     <TextView
         android:id="@+id/fingerprint_status"
@@ -18,16 +121,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/fingerprint_icon"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="Place your finger on the sensor" />
+        android:layout_marginTop="@dimen/_8sdp"
+        android:text="برای استفاده از اثر انگشت روی آن بزنید" />
 
-    <Button
-        android:id="@+id/cancel_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:text="Cancel" />
 
-</RelativeLayout>
+
+</LinearLayout>
