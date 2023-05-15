@@ -33,6 +33,8 @@
         <attr name="keypadShowDeleteButton" format="boolean" />
         <attr name="keypadDeleteButtonPressedColor" format="color" />
 
+
+
         <attr name="dotEmptyBackground" format="reference" />
         <attr name="dotFilledBackground" format="reference" />
         <attr name="dotDiameter" format="dimension" />
@@ -43,5 +45,12 @@
             <enum name="fillWithAnimation" value="2" />
         </attr>
 
+    </declare-styleable>
+
+    <declare-styleable name="MediaEditText">
+        <attr name="mediaPadding" format="dimension" />
+        <attr name="mediaBorderWidth" format="dimension" />
+        <attr name="mediaBorderColor" format="color" />
+        <attr name="mediaBackgroundColor" format="color" />
     </declare-styleable>
 </resources>

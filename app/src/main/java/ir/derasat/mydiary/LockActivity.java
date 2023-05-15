@@ -279,7 +279,7 @@ public class LockActivity extends AppCompatActivity {
     }
 
     private void unlockApp() {
-        Intent intent = new Intent(this, LockSettingActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }

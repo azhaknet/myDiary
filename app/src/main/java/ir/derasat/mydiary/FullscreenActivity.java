@@ -53,7 +53,7 @@ public class FullscreenActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else {
-                    intent = new Intent(FullscreenActivity.this,LockSettingActivity.class);
+                    intent = new Intent(FullscreenActivity.this,MainActivity.class);
                     startActivity(intent);
                 }
 

@@ -77,4 +77,5 @@
     <string name="message_pattern_started">Pattern drawing started</string>
     <string name="message_pattern_detected">Pattern drawing completed</string>
     <string name="message_pattern_cleared">Pattern cleared</string>
+    <string name="title_activity_test">TestActivity</string>
 </resources>
