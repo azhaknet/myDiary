@@ -1,6 +1,7 @@
 package ir.derasat.mydiary;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -79,7 +80,8 @@ public class DiaryDetailsActivity extends AppCompatActivity {
                 case "IV":
 
                     ImageView imageView = new ImageView(this);
-                    imageView.setImageBitmap(StringToBitMap(view[1]));
+                    //imageView.setImageBitmap(StringToBitMap(view[1]));
+                    imageView.setImageURI(Uri.parse(view[1]));
                     imageView.setBackgroundResource(R.drawable.player_bk);
                     imageView.setPadding(30,20,30,20);
                     imageView.setAdjustViewBounds(true);
@@ -174,17 +176,6 @@ public class DiaryDetailsActivity extends AppCompatActivity {
             }
         }
     }
-    public Bitmap StringToBitMap(String encodedString){
-        try {
-            byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
-            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            return bitmap;
-        } catch(Exception e) {
-            e.getMessage();
-            return null;
-        }
-    }
-
     public void onEditButtonClick(View view) {
         Intent intent = new Intent(DiaryDetailsActivity.this, DiaryEditActivity.class);
         intent.putExtra("diaryId", diaryId);

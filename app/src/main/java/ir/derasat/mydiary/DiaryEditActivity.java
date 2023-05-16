@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -51,10 +52,13 @@ import net.gotev.speech.SupportedLanguagesListener;
 import net.gotev.speech.UnsupportedReason;
 import net.gotev.speech.ui.SpeechProgressView;
 
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 public class DiaryEditActivity extends AppCompatActivity implements SpeechDelegate {
 
@@ -213,7 +217,8 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
                         // Get the selected image URI
                         ImageView cv = new ImageView(DiaryEditActivity.this);
                         cv.setImageBitmap(camBitmap);
-                        cv.setTag(BitMapToString(camBitmap));
+                        cv.setTag(saveBitmapToCache(camBitmap,"image.jpg"));
+
                         cv.setBackgroundResource(R.drawable.player_bk);
                         cv.setPadding(20,20,20,20);
                         cv.setAdjustViewBounds(true);
@@ -250,7 +255,8 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
                         // Get the selected image URI
                         ImageView iv = new ImageView(DiaryEditActivity.this);
                         iv.setImageURI(selectedImageUri);
-                        iv.setTag(BitMapToString(((BitmapDrawable)iv.getDrawable()).getBitmap()));
+                        iv.setTag(saveBitmapToCache(((BitmapDrawable)iv.getDrawable()).getBitmap(),"image.jpg"));
+
                         iv.setBackgroundResource(R.drawable.player_bk);
                         iv.setPadding(20,20,20,20);
                         iv.setAdjustViewBounds(true);
@@ -300,7 +306,7 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
                         playerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIXED_HEIGHT);
                         ExoPlayer player = new ExoPlayer.Builder(DiaryEditActivity.this).build();
                         player.setMediaItem(MediaItem.fromUri(selectedVideoUri));
-                        playerView.setTag(getRealPathFromURI(DiaryEditActivity.this,selectedVideoUri));
+                        playerView.setTag(getRealPathVFromURI(DiaryEditActivity.this,selectedVideoUri));
                         player.prepare();
                         playerView.setPlayer(player);
                         playerView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -396,7 +402,8 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
                         // Get the selected audio URI
                         ImageView si = new ImageView(DiaryEditActivity.this);
                         si.setImageBitmap(signatureBitmap);
-                        si.setTag(BitMapToString(signatureBitmap));
+
+                        si.setTag(saveBitmapToCache(signatureBitmap,"signature.png"));
                         si.setBackgroundResource(R.drawable.player_bk);
                         si.setPadding(40,40,40,40);
                         si.setAdjustViewBounds(true);
@@ -489,7 +496,8 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
                 case "IV":
 
                     ImageView imageView = new ImageView(this);
-                    imageView.setImageBitmap(StringToBitMap(view[1]));
+                    //imageView.setImageBitmap(StringToBitMap(view[1]));
+                    imageView.setImageURI(Uri.parse(view[1]));
                     imageView.setTag(view[1]);
                     imageView.setBackgroundResource(R.drawable.player_bk);
                     imageView.setPadding(20,20,20,20);
@@ -629,12 +637,59 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
                     Gravity.BOTTOM | Gravity.CENTER));
         }
     }
-    public static String getRealPathFromURI(Context context, Uri contentUri) {
+    public Uri saveBitmapToCache(Bitmap bitmap, String baseFileName) {
+        // Get reference to the cache directory
+        File cacheDir = getCacheDir();
+
+        String fileName = generateUniqueFileName(baseFileName);
+
+        // Create file object with desired path and file name
+        File file = new File(cacheDir, fileName);
+
+        try {
+            // Create output stream
+            FileOutputStream outputStream = new FileOutputStream(file);
+
+            // Compress bitmap to PNG and write to output stream
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+
+            // Close output stream
+            return FileProvider.getUriForFile(this, getPackageName()+ ".fileprovider", file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    private String generateUniqueFileName(String baseFileName) {
+        // Get the current timestamp in milliseconds
+        long timestamp = System.currentTimeMillis();
+
+        // Generate a random number between 0 and 9999
+        int randomNumber = new Random().nextInt(10000);
+
+        // Combine the timestamp and random number with the base file name
+        return baseFileName + "_" + timestamp + "_" + randomNumber + ".jpg";
+    }
+    public static String getRealPathVFromURI(Context context, Uri contentUri) {
         Cursor cursor = null;
         try {
             String[] proj = { MediaStore.Video.Media.DATA };
             cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
             int column_index = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
+    public static String getRealPathIFromURI(Context context, Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = { MediaStore.Images.Media.DATA };
+            cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
             return cursor.getString(column_index);
         } finally {
@@ -1026,13 +1081,7 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
                 .show();
     }
 
-   public String BitMapToString(Bitmap bitmap){
-        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
-        byte [] b=baos.toByteArray();
-        String temp= Base64.encodeToString(b, Base64.DEFAULT);
-        return temp;
-    }
+
 
 
     public void onSaveButtonClick(View view) {
