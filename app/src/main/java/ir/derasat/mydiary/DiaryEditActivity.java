@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -156,6 +157,15 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
             @Override
             public void onClick(View v) {
                 launchImagePicker();
+
+            }
+        });
+        ImageButton btnT=findViewById(R.id.addText);
+
+        btnT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addEditText();
 
             }
         });
@@ -467,9 +477,6 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
             FrameLayout fm=new FrameLayout(DiaryEditActivity.this);
             ImageButton fdel=new ImageButton(DiaryEditActivity.this);
             fdel.setImageResource(R.drawable.delete_btn);
-            fdel.setLayoutParams(new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
             fdel.setVisibility(View.GONE);
             fdel.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -581,9 +588,8 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
                                 FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT,
                                 Gravity.BOTTOM | Gravity.CENTER));
                     }
-                    fm.addView(fdel, new FrameLayout.LayoutParams(
-                            FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT,
-                            Gravity.BOTTOM | Gravity.CENTER));
+
+
                     contentsEditView.addView(fm);
                     break;
                 case "ET":
@@ -591,6 +597,20 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
                     et.setBackgroundResource(android.R.color.transparent);
                     et.setHint("Write any things...");
                     et.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+                    int finalI = i;
+                    et.setOnKeyListener(new View.OnKeyListener() {
+                        @Override
+                        public boolean onKey(View v, int keyCode, KeyEvent event) {
+                            //You can identify which key pressed by checking keyCode value with KeyEvent.KEYCODE_
+                            if(keyCode == KeyEvent.KEYCODE_DEL) {
+                                //this is for backspace
+                                if (finalI !=0){
+                                    contentsEditView.removeView(v);
+                                }
+                            }
+                            return false;
+                        }
+                    });
 
                     et.setSingleLine(false);
 
@@ -604,6 +624,9 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
                     break;
 
             }
+            fm.addView(fdel, new FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT,
+                    Gravity.BOTTOM | Gravity.CENTER));
         }
     }
     public static String getRealPathFromURI(Context context, Uri contentUri) {
@@ -627,6 +650,20 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
 
         ET.setHint("Write any things...");
         ET.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+
+        ET.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //You can identify which key pressed by checking keyCode value with KeyEvent.KEYCODE_
+                if(keyCode == KeyEvent.KEYCODE_DEL && ET.getText().toString().equals("")) {
+                    //this is for backspace
+                    if (contentsEditView.getChildCount() !=0 ) {
+                        contentsEditView.removeView(v);
+                    }
+                }
+                return false;
+            }
+        });
 
         ET.setSingleLine(false);
 

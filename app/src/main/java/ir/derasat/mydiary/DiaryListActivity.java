@@ -59,7 +59,7 @@ public class DiaryListActivity extends AppCompatActivity implements SearchView.O
     @Override
     protected void onResume() {
         super.onResume();
-        updateNoteList();
+            updateNoteList();
     }
 
     private void updateNoteList() {
