@@ -1,5 +1,6 @@
 package ir.derasat.mydiary;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -18,8 +19,8 @@ import java.util.List;
 
 public class DiaryListActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
-    private ListView noteListView;
-    private ArrayAdapter<Diary> noteAdapter;
+    private ListView DiaryListView;
+    private ArrayAdapter<Diary> DiaryAdapter;
     private List<Diary> diaryList = new ArrayList<>();
     private DiariesDatabaseHelper dbHelper;
 
@@ -28,10 +29,10 @@ public class DiaryListActivity extends AppCompatActivity implements SearchView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_list);
 
-        noteListView = findViewById(R.id.recycler_view);
-        noteAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, diaryList);
-        noteListView.setAdapter(noteAdapter);
-        noteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        DiaryListView = findViewById(R.id.recycler_view);
+        DiaryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, diaryList);
+        DiaryListView.setAdapter(DiaryAdapter);
+        DiaryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(DiaryListActivity.this, DiaryDetailsActivity.class);
@@ -40,7 +41,7 @@ public class DiaryListActivity extends AppCompatActivity implements SearchView.O
             }
 
         });
-        noteListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        DiaryListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(DiaryListActivity.this, DiaryEditActivity.class);
@@ -59,22 +60,28 @@ public class DiaryListActivity extends AppCompatActivity implements SearchView.O
     @Override
     protected void onResume() {
         super.onResume();
-            updateNoteList();
+            updateDiaryList();
     }
 
-    private void updateNoteList() {
+    private void updateDiaryList() {
         diaryList.clear();
-        diaryList.addAll(dbHelper.getAllNotes());
-        noteAdapter.notifyDataSetChanged();
+        diaryList.addAll(dbHelper.getAllDiaries());
+        DiaryAdapter.notifyDataSetChanged();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_note_list, menu);
+        getMenuInflater().inflate(R.menu.menu_diary_list, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_settings);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-//        searchView.setOnQueryTextListener(this);
+        searchItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                startActivity(new Intent(DiaryListActivity.this, SearchActivity.class));
+
+                return false;
+            }
+        });
 
         return true;
     }
@@ -82,7 +89,7 @@ public class DiaryListActivity extends AppCompatActivity implements SearchView.O
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-            if(item.getItemId()==R.id.action_add_note) {
+            if(item.getItemId()==R.id.action_add_diary) {
                 Intent intent = new Intent(this, DiaryEditActivity.class);
                 startActivity(intent);
                 return true;
@@ -99,7 +106,7 @@ public class DiaryListActivity extends AppCompatActivity implements SearchView.O
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        noteAdapter.getFilter().filter(newText);
+        DiaryAdapter.getFilter().filter(newText);
         return true;
     }
 

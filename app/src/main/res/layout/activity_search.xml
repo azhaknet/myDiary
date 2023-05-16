@@ -9,19 +9,19 @@
         android:id="@+id/edit_text_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Search Notes"
+        android:hint="Search Diary"
         android:imeOptions="actionSearch"
         android:inputType="text"
         android:maxLines="1"
         android:singleLine="true" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ListView
         android:id="@+id/recycler_view_search_results"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:paddingTop="16dp"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/text_view_no_results"
@@ -30,6 +30,6 @@
         android:gravity="center"
         android:text="No results found"
         android:textSize="18sp"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
 </LinearLayout>

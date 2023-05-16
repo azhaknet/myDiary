@@ -99,7 +99,7 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
         diaryId = getIntent().getIntExtra("diaryId", -1);
 
         if (diaryId != -1) {
-            Diary diary = dbHelper.getNoteById(diaryId);
+            Diary diary = dbHelper.getDiaryById(diaryId);
             titleEditText.setText(diary.getTitle());
             categoryEditText.setText(diary.getCategory());
             tagsEditText.setText(diary.getTags());
@@ -479,7 +479,7 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
     }
 
     private void contentLoader() {
-        String[] views = dbHelper.getNoteById(diaryId).getViews();
+        String[] views = dbHelper.getDiaryById(diaryId).getViews();
         for (int i = 0; i < views.length; i++) {
             FrameLayout fm=new FrameLayout(DiaryEditActivity.this);
             ImageButton fdel=new ImageButton(DiaryEditActivity.this);
@@ -1139,15 +1139,15 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
             diary.setTags(tags);
             diary.setContents(contents);
             diary.setViews(views.toArray(new String[0]));
-            dbHelper.addNote(diary);
+            dbHelper.addDiary(diary);
         } else {
-            Diary diary = dbHelper.getNoteById(diaryId);
+            Diary diary = dbHelper.getDiaryById(diaryId);
             diary.setTitle(title);
             diary.setCategory(category);
             diary.setTags(tags);
             diary.setContents(contents);
             diary.setViews(views.toArray(new String[0]));
-            dbHelper.updateNote(diary);
+            dbHelper.updateDiary(diary);
         }
 
         finish();

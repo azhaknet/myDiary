@@ -1,14 +1,10 @@
 package ir.derasat.mydiary;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +55,7 @@ public class DiaryDetailsActivity extends AppCompatActivity {
             finish();
         }
 
-        Diary diary = dbHelper.getNoteById(diaryId);
+        Diary diary = dbHelper.getDiaryById(diaryId);
 
         titleTextView.setText(diary.getTitle());
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
@@ -183,7 +179,7 @@ public class DiaryDetailsActivity extends AppCompatActivity {
     }
 
     public void onDeleteButtonClick(View view) {
-        dbHelper.deleteNoteById(diaryId);
+        dbHelper.deleteDiaryById(diaryId);
         finish();
     }
 

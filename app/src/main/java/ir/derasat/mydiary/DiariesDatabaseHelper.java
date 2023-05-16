@@ -31,7 +31,7 @@ public class DiariesDatabaseHelper extends SQLiteOpenHelper {
         // Not used, as this is the first version of the database.
     }
 
-    public void addNote(Diary diary) {
+    public void addDiary(Diary diary) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("title", diary.getTitle());
@@ -44,7 +44,7 @@ public class DiariesDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void updateNote(Diary diary) {
+    public void updateDiary(Diary diary) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("title", diary.getTitle());
@@ -57,13 +57,13 @@ public class DiariesDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteNoteById(int diaryId) {
+    public void deleteDiaryById(int diaryId) {
         SQLiteDatabase db = getWritableDatabase();
         db.delete("diaries", "_id=?", new String[]{String.valueOf(diaryId)});
         db.close();
     }
 
-    public List<Diary> getAllNotes() {
+    public List<Diary> getAllDiaries() {
         List<Diary> diaryList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM diaries ORDER BY creation_date DESC", null);
@@ -85,21 +85,21 @@ public class DiariesDatabaseHelper extends SQLiteOpenHelper {
         return diaryList;
     }
     @SuppressLint("Range")
-    public List<Diary> searchNotes(String query) {
+    public List<Diary> searchDiaries(String query) {
         List<Diary> diariesList = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String selectQuery = "SELECT * FROM diaries WHERE title LIKE '%" + query + "%' OR content LIKE '%" + query + "%'";
+        String selectQuery = "SELECT * FROM diaries WHERE title LIKE '%" + query + "%' OR contents LIKE '%" + query + "%'";
 
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst()) {
             do {
                 Diary diary = new Diary();
-                diary.setId(cursor.getInt(cursor.getColumnIndex("id")));
-                diary.setTitle(cursor.getString(cursor.getColumnIndex("title")));
-                diary.setContents(cursor.getString(cursor.getColumnIndex("content")));
+                diary.setId(cursor.getInt(0));
+                diary.setTitle(cursor.getString(1));
+                diary.setContents(cursor.getString(5));
                 diariesList.add(diary);
             } while (cursor.moveToNext());
         }
@@ -110,7 +110,7 @@ public class DiariesDatabaseHelper extends SQLiteOpenHelper {
         return diariesList;
     }
 
-    public Diary getNoteById(int id) {
+    public Diary getDiaryById(int id) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM diaries WHERE _id=?", new String[]{String.valueOf(id)});
         Diary diary = null;

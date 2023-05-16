@@ -14,7 +14,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:titleTextColor="@android:color/white"
-            app:title="My Notes" />
+            app:title="My Diary" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
