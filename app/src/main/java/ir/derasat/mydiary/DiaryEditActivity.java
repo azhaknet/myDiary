@@ -29,12 +29,14 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,6 +67,7 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
     private EditText titleEditText;
     private EditText categoryEditText;
     private EditText tagsEditText;
+    private Spinner moodSpinner;
     private LinearLayout contentsEditView;
 
     private Button saveBtn;
@@ -89,6 +92,14 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
         titleEditText = findViewById(R.id.edit_text_title);
         categoryEditText = findViewById(R.id.category_edit_text);
         tagsEditText = findViewById(R.id.tags_edit_text);
+        moodSpinner = findViewById(R.id.mood_spinner);
+        List<String> moods = new ArrayList<>();
+        moods.add(0, "Natural");
+        moods.add(1, "Positive");
+        moods.add(2, "Negative");
+        ArrayAdapter<String> adapterMood = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, moods);
+        adapterMood.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        moodSpinner.setAdapter(adapterMood);
         contentsEditView = findViewById(R.id.cLayout);
         saveBtn= findViewById(R.id.button_save);
         saveBtn.setOnClickListener(this::onSaveButtonClick);
@@ -103,6 +114,7 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
             titleEditText.setText(diary.getTitle());
             categoryEditText.setText(diary.getCategory());
             tagsEditText.setText(diary.getTags());
+            moodSpinner.setSelection(diary.getMood());
             //contentsEditView.setText(diary.getContents());
             contentLoader();
         }
@@ -1088,6 +1100,7 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
         String title = titleEditText.getText().toString().trim();
         String category = categoryEditText.getText().toString().trim();
         String tags = tagsEditText.getText().toString().trim();
+        int mood=moodSpinner.getSelectedItemPosition();
         String contents = "";
         List<String> views= new ArrayList<>();
         for (int i = 0; i < contentsEditView.getChildCount(); i++) {
@@ -1137,6 +1150,7 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
             diary.setTitle(title);
             diary.setCategory(category);
             diary.setTags(tags);
+            diary.setMood(mood);
             diary.setContents(contents);
             diary.setViews(views.toArray(new String[0]));
             dbHelper.addDiary(diary);
@@ -1145,6 +1159,7 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
             diary.setTitle(title);
             diary.setCategory(category);
             diary.setTags(tags);
+            diary.setMood(mood);
             diary.setContents(contents);
             diary.setViews(views.toArray(new String[0]));
             dbHelper.updateDiary(diary);

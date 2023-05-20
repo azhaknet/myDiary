@@ -1,10 +1,13 @@
 package ir.derasat.mydiary;
 
-import android.text.TextUtils;
-
+import java.io.Serializable;
 import java.util.Date;
 
-public class Diary {
+public class Diary implements Serializable{
+
+    public static final int NATURAL = 0;
+    public static final int POSITIVE = 1;
+    public static final int NEGATIVE = 2;
 
     private int id;
     private String title;
@@ -13,6 +16,7 @@ public class Diary {
     private String tags;
     private String contents;
 
+    private int mood;
     private String[] views;
 
     public Diary() {
@@ -59,6 +63,25 @@ public class Diary {
         this.tags = tags;
     }
 
+    public int getMood() {
+        return mood;
+    }
+    public String getStringMood() {
+        switch (mood) {
+            case NATURAL:
+                return "NATURAL";
+            case POSITIVE:
+                return "POSITIVE";
+            case NEGATIVE:
+                return "NEGATIVE";
+            default:
+                return "NATURAL";
+        }
+    }
+
+    public void setMood(int mood) {
+        this.mood = mood;
+    }
     public String getContents() {
         return contents;
     }
@@ -81,7 +104,8 @@ public class Diary {
         return title;
     }
 
-    private String arrayToString(String[] arr) {
-        return TextUtils.join(",", arr);
+    public String getIdentifier() {
+        return title+category+mood+tags;
     }
+
 }

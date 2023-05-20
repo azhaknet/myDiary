@@ -27,6 +27,7 @@ public class DiaryDetailsActivity extends AppCompatActivity {
     private TextView creationDateTextView;
     private TextView categoryTextView;
     private TextView tagsTextView;
+    private TextView moodTextView;
     private LinearLayout contents;
     private Button editBtn;
     private Button deleteBtn;
@@ -43,6 +44,7 @@ public class DiaryDetailsActivity extends AppCompatActivity {
         creationDateTextView = findViewById(R.id.creation_date_text_view);
         categoryTextView = findViewById(R.id.category_text_view);
         tagsTextView = findViewById(R.id.tags_text_view);
+        moodTextView = findViewById(R.id.mood_text_view);
         contents = findViewById(R.id.detailLay);
         editBtn=findViewById(R.id.button_edit);
         editBtn.setOnClickListener(this::onEditButtonClick);
@@ -62,8 +64,9 @@ public class DiaryDetailsActivity extends AppCompatActivity {
         creationDateTextView.setText(dateFormat.format(diary.getCreationDate()));
         categoryTextView.setText(diary.getCategory());
         tagsTextView.setText(diary.getTags());
+        moodTextView.setText(diary.getStringMood());
         String[] views =diary.getViews();
-         layoutParams= new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, 620);
+        layoutParams= new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, 620);
         layoutParams.gravity = Gravity.CENTER_HORIZONTAL;
         contentLoader(views);
 

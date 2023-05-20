@@ -29,15 +29,45 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/edit_text_title"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Title"
-                android:inputType="text"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textSize="24sp" />
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edit_text_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:hint="Title"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="24sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:labelFor="@id/mood_spinner"
+                        android:text="Mood" />
+
+                    <Spinner
+                        android:id="@+id/mood_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/tags_edit_text"
@@ -117,75 +147,76 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="675dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="@dimen/_8sdp">
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="675dp">
 
-        <ImageButton
-            android:id="@+id/addText"
-            style="@android:style/Widget.Holo.ImageButton"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/text_snippet" />
+            android:layout_margin="@dimen/_8sdp"
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/imagePick"
-            style="@android:style/Widget.Holo.ImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/image" />
+            <ImageButton
+                android:id="@+id/addText"
+                style="@android:style/Widget.Holo.ImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/text_snippet" />
 
-        <ImageButton
-            android:id="@+id/takeCamera"
-            style="@android:style/Widget.Holo.ImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_menu_camera" />
+            <ImageButton
+                android:id="@+id/imagePick"
+                style="@android:style/Widget.Holo.ImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/image" />
 
-        <ImageButton
-            android:id="@+id/sttEngine"
-            style="@android:style/Widget.Holo.ImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/stt" />
+            <ImageButton
+                android:id="@+id/takeCamera"
+                style="@android:style/Widget.Holo.ImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_menu_camera" />
 
-        <ImageButton
-            android:id="@+id/recordVoice"
-            style="@android:style/Widget.Holo.ImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/voice" />
+            <ImageButton
+                android:id="@+id/sttEngine"
+                style="@android:style/Widget.Holo.ImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/stt" />
 
-        <ImageButton
-            android:id="@+id/audioPick"
-            style="@android:style/Widget.Holo.ImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/music" />
+            <ImageButton
+                android:id="@+id/recordVoice"
+                style="@android:style/Widget.Holo.ImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/voice" />
 
-        <ImageButton
-        android:id="@+id/videoPick"
-        style="@android:style/Widget.Holo.ImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/video" />
+            <ImageButton
+                android:id="@+id/audioPick"
+                style="@android:style/Widget.Holo.ImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/music" />
 
-        <ImageButton
-            android:id="@+id/signPick"
-            style="@android:style/Widget.Holo.ImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/sign" />
+            <ImageButton
+                android:id="@+id/videoPick"
+                style="@android:style/Widget.Holo.ImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/video" />
 
-    </LinearLayout>
+            <ImageButton
+                android:id="@+id/signPick"
+                style="@android:style/Widget.Holo.ImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/sign" />
+
+        </LinearLayout>
     </HorizontalScrollView>
 
     <LinearLayout

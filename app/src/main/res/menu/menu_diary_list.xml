@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
         android:id="@+id/action_settings"
         android:icon="@android:drawable/ic_menu_search"
@@ -10,5 +11,15 @@
         android:id="@+id/action_add_diary"
         android:icon="@android:drawable/ic_menu_add"
         android:title="Add diary"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_export"
+        android:icon="@drawable/backup"
+        android:title="Backup"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_import"
+        android:icon="@drawable/restore"
+        android:title="Recovery"
+        app:showAsAction="ifRoom" />
 </menu>

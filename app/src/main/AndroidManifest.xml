@@ -25,6 +25,7 @@
 
     <application
         android:allowBackup="true"
+        android:backupAgent=".MyBackupAgent"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher_foreground"
@@ -34,6 +35,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyDiary"
         tools:targetApi="31">
+
         <provider
             android:name=".utils.MyFileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -69,6 +71,7 @@
         <activity
             android:name=".DiaryListActivity"
             android:exported="false"
+            android:grantUriPermissions="true"
             />
         <activity
             android:name=".ForgetPassActivity"
