@@ -671,12 +671,12 @@ public class DiaryStatistics {
     private void calculateMoodByDayOfWeek(List<Diary> diaries) {
         Map<String, Integer> moodCountByDayOfWeek = new HashMap<>();
         for (Diary diary : diaries) {
-            String mood = diary.getStringMood();
-            if (mood != null) {
+            int mood = getSMood(diary.getMood());
+            if (mood != -1) {
                 LocalDateTime dateTime = Instant.ofEpochMilli(diary.getCreationDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate().atStartOfDay();;
                 String dayOfWeek = dateTime.getDayOfWeek().toString();
                 int count = getOrDefault(moodCountByDayOfWeek,dayOfWeek);
-                moodCountByDayOfWeek.put(dayOfWeek, count + 1);
+                moodCountByDayOfWeek.put(dayOfWeek, count + mood);
             }
         }
         int totalMoods = 0;
@@ -686,7 +686,7 @@ public class DiaryStatistics {
         for (Map.Entry<String, Integer> entry : moodCountByDayOfWeek.entrySet()) {
             String dayOfWeek = entry.getKey();
             int count = entry.getValue();
-            double percent = ((double) count / totalMoods) * 100;
+            double percent = ((double) count / totalMoods)*100;
             moodByDayOfWeek.put(dayOfWeek, percent);
         }
     }

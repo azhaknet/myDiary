@@ -94,7 +94,7 @@ public class StatisticActivity extends AppCompatActivity {
 
 
         Map<String, Double> moodDistributionInWeek = diaryStatistics.getMoodByDayOfWeek();
-        int totalWordCount = diaryStatistics.getTotalWordCount();
+        //int totalWordCount = diaryStatistics.getTotalWordCount();
         String dateRange = diaryStatistics.getDateRange();
         TextView dateRangeTextView = findViewById(R.id.date_range_text_view);
         dateRangeTextView.setText(String.format(Locale.getDefault(), "Date Range: %s", dateRange));
@@ -302,7 +302,7 @@ public class StatisticActivity extends AppCompatActivity {
 ,"did"
 ,"didn't"
 ,"do"
-,"    does"
+,"does"
 ,"doesn't"
 ,"doing"
 ,"don't"
@@ -443,7 +443,7 @@ public class StatisticActivity extends AppCompatActivity {
 ,"yours"
 ,"yourself"
 ,"yourselves"
-      ,"can" ,"comes","will","want","like","bought","get","just","much","comes"
+      ,"can" ,"comes","will","want","like","bought","get","just","much"," "
 
 
       };

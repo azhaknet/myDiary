@@ -41,8 +41,6 @@ public class FullscreenActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("my_prefs", MODE_PRIVATE);
         boolean islocked = sharedPreferences.getBoolean("LockEnabled", false);
         boolean fingerEnbl =sharedPreferences.getBoolean("fingerEnabled",false);
-        Toast.makeText(this, "lock State: "+islocked, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "finger State: "+fingerEnbl, Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
