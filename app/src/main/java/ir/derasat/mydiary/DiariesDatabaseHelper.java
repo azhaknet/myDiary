@@ -44,7 +44,7 @@ public class DiariesDatabaseHelper extends SQLiteOpenHelper {
         values.put("tags", diary.getTags());
         values.put("mood", diary.getMood());
         values.put("contents", diary.getContents());
-        values.put("views", TextUtils.join(",", diary.getViews()));
+        values.put("views", TextUtils.join("_,!", diary.getViews()));
         db.insert("diaries", null, values);
         db.close();
     }
@@ -58,7 +58,7 @@ public class DiariesDatabaseHelper extends SQLiteOpenHelper {
         values.put("tags", diary.getTags());
         values.put("mood", diary.getMood());
         values.put("contents", diary.getContents());
-        values.put("views", TextUtils.join(",", diary.getViews()));
+        values.put("views", TextUtils.join("_,!", diary.getViews()));
         db.update("diaries", values, "_id=?", new String[]{String.valueOf(diary.getId())});
         db.close();
 
@@ -84,7 +84,7 @@ public class DiariesDatabaseHelper extends SQLiteOpenHelper {
                 diary.setTags(cursor.getString(4));
                 diary.setMood(cursor.getInt(5));
                 diary.setContents(cursor.getString(6));
-                diary.setViews(cursor.getString(7).split(","));
+                diary.setViews(cursor.getString(7).split("_,!"));
                 diaryList.add(diary);
             } while (cursor.moveToNext());
         }
@@ -151,7 +151,7 @@ public class DiariesDatabaseHelper extends SQLiteOpenHelper {
                 diary.setTags(cursor.getString(4));
                 diary.setMood(cursor.getInt(5));
                 diary.setContents(cursor.getString(6));
-                diary.setViews(cursor.getString(7).split(","));
+                diary.setViews(cursor.getString(7).split("_,!"));
                 diariesList.add(diary);
             } while (cursor.moveToNext());
         }
@@ -176,7 +176,7 @@ public class DiariesDatabaseHelper extends SQLiteOpenHelper {
             diary.setTags(cursor.getString(4));
             diary.setMood(cursor.getInt(5));
             diary.setContents(cursor.getString(6));
-            diary.setViews(cursor.getString(7).split(","));
+            diary.setViews(cursor.getString(7).split("_,!"));
         }
         cursor.close();
         db.close();

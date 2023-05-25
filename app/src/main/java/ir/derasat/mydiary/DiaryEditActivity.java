@@ -1,8 +1,11 @@
 package ir.derasat.mydiary;
 
+import static ir.derasat.mydiary.LockActivity.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -25,6 +28,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -54,13 +58,21 @@ import net.gotev.speech.SupportedLanguagesListener;
 import net.gotev.speech.UnsupportedReason;
 import net.gotev.speech.ui.SpeechProgressView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+
+import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
+import ir.hamsaa.persiandatepicker.api.PersianPickerDate;
+import ir.hamsaa.persiandatepicker.api.PersianPickerListener;
+import ir.hamsaa.persiandatepicker.util.PersianCalendarUtils;
 
 public class DiaryEditActivity extends AppCompatActivity implements SpeechDelegate {
 
@@ -83,6 +95,10 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
     private EditText text;
     private SpeechProgressView progress;
     private LinearLayout linearLayout;
+    private PersianDatePickerDialog picker;
+
+    private Date date;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +120,18 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
         saveBtn= findViewById(R.id.button_save);
         saveBtn.setOnClickListener(this::onSaveButtonClick);
         dbHelper = new DiariesDatabaseHelper(this);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
         layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, 620);
         layoutParams.gravity = Gravity.CENTER_HORIZONTAL;
 
@@ -124,11 +152,50 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
         caption.setVisibility(View.GONE);
         contentsEditView.setPadding(20,20,20,20);
         editText=findViewById(R.id.editTextText);
+        ImageButton dataPicker=findViewById(R.id.date_piker);
+
         ImageButton signatureButton = findViewById(R.id.signPick);
         signatureButton.setOnClickListener(v -> {
             Intent intent = new Intent(DiaryEditActivity.this, SignActivity.class);
             startActivityForResult(intent, SIGNATURE_REQUEST_CODE);
         });
+
+        dataPicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picker = new PersianDatePickerDialog(DiaryEditActivity.this)
+                        .setPositiveButtonString("باشه")
+                        .setNegativeButton("بیخیال")
+                        .setTodayButton("امروز")
+                        .setTodayButtonVisible(true)
+                        .setMinYear(1300)
+                        .setMaxYear(PersianDatePickerDialog.THIS_YEAR)
+                        .setInitDate(PersianDatePickerDialog.THIS_YEAR, PersianDatePickerDialog.THIS_MONTH, PersianDatePickerDialog.THIS_DAY)
+                        .setActionTextColor(Color.GRAY)
+                        .setTitleType(PersianDatePickerDialog.WEEKDAY_DAY_MONTH_YEAR)
+                        .setShowInBottomSheet(true)
+                        .setListener(new PersianPickerListener() {
+                            @Override
+                            public void onDateSelected(@NotNull PersianPickerDate persianPickerDate) {
+                                Log.d(TAG, "onDateSelected: " + persianPickerDate.getTimestamp());//675930448000
+                                Log.d(TAG, "onDateSelected: " + persianPickerDate.getGregorianDate());//Mon Jun 03 10:57:28 GMT+04:30 1991
+                                Log.d(TAG, "onDateSelected: " + persianPickerDate.getPersianLongDate());// دوشنبه  13  خرداد  1370
+                                Log.d(TAG, "onDateSelected: " + persianPickerDate.getPersianMonthName());//خرداد
+                                Log.d(TAG, "onDateSelected: " + PersianCalendarUtils.isPersianLeapYear(persianPickerDate.getPersianYear()));//true
+                                Toast.makeText(DiaryEditActivity.this, persianPickerDate.getPersianYear() + "/" + persianPickerDate.getPersianMonth() + "/" + persianPickerDate.getPersianDay(), Toast.LENGTH_SHORT).show();
+                                date=persianPickerDate.getGregorianDate();
+                            }
+
+                            @Override
+                            public void onDismissed() {
+
+                            }
+                        });
+
+                picker.show();
+            }
+        });
+
 
         ImageButton btnv= findViewById(R.id.videoPick);
 
@@ -1129,7 +1196,7 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
             }
             if (!captionV.equals("")) {
                 views.add("TV!@#"+captionV);
-                contents+=("/n  "+captionV+"  /n");
+                contents+=("\n  "+captionV+"  \n");
             }
             }
             else if (tview instanceof EditText) {
@@ -1146,7 +1213,11 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
         }
 
         if (diaryId == -1) {
-            Diary diary = new Diary();
+            Diary diary;
+            if (date == null)
+                diary = new Diary();
+            else
+                diary = new Diary(date);
             diary.setTitle(title);
             diary.setCategory(category);
             diary.setTags(tags);
@@ -1157,6 +1228,9 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
         } else {
             Diary diary = dbHelper.getDiaryById(diaryId);
             diary.setTitle(title);
+            if (date != null) {
+                diary.setCreationDate(date);
+            }
             diary.setCategory(category);
             diary.setTags(tags);
             diary.setMood(mood);

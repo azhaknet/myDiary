@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StatisticActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/date_range_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:text="Date Range:"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="General Statistics:"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/diary_general_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:labelFor="@id/mood_pie_chart"
+                android:text="Mood Percent:"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/mood_pie_chart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_240sdp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:labelFor="@id/diary_week_bar_chart"
+                android:text="Diary In week:"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/diary_week_bar_chart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_240sdp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:labelFor="@id/diary_year_line_chart"
+                android:text="Diary In year:"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/diary_year_line_chart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_240sdp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:labelFor="@id/diary_cat_bar_chart"
+                android:text="Diary In Category:"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/diary_cat_bar_chart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_240sdp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:labelFor="@id/words_cloud"
+                android:text="Most Used Words:"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/words_cloud"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_240sdp"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:labelFor="@id/tags_cloud"
+                android:text="Most Used Tags:"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/tags_cloud"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_240sdp"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:labelFor="@id/diary_length_mood_hbar_chart"
+                android:text="Diary Length In Mood:"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+            <com.github.mikephil.charting.charts.HorizontalBarChart
+                android:id="@+id/diary_length_mood_hbar_chart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200sdp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:labelFor="@id/mood_week_bar_chart"
+                android:text="Mood in week:"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/mood_week_bar_chart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_240sdp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:labelFor="@id/media_c_h_bar_chart"
+                android:text="Media Count:"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+            <com.github.mikephil.charting.charts.HorizontalBarChart
+                android:id="@+id/media_c_h_bar_chart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_240sdp" />
+
+            <TextView
+                android:id="@+id/total_word_count_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

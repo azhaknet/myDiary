@@ -20,35 +20,96 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:text="Welcome to My Diary App" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_margin="@dimen/_8sdp"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="View Diary" />
+            <ImageButton
+                android:id="@+id/diaryIb"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"
+                android:background="@drawable/back_ibtn"
+                app:srcCompat="@drawable/sticky_note" />
+
+            <TextView
+                android:id="@+id/diaryTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:labelFor="@id/diaryIb"
+                android:text="Diaries"
+                android:layout_marginBottom="@dimen/_8sdp"/>
+
+            <ImageButton
+                android:id="@+id/lockIb"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:background="@drawable/back_ibtn"
+                app:srcCompat="@drawable/lock"
+                />
+
+            <TextView
+                android:id="@+id/lockTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:labelFor="@id/lockIb"
+                android:text="Lock Setting" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_8sdp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/statsIb"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"
+                android:background="@drawable/back_ibtn"
+                app:srcCompat="@drawable/stats" />
+
+            <TextView
+                android:id="@+id/statsTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:labelFor="@id/statsIb"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:text="Statistics" />
+
+            <ImageButton
+                android:id="@+id/exitIb"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:background="@drawable/back_ibtn"
+                app:srcCompat="@drawable/exit_to_app" />
+
+            <TextView
+                android:id="@+id/exitTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:labelFor="@id/exitIb"
+                android:text="Exit" />
+        </LinearLayout>
+
     </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

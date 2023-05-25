@@ -22,6 +22,9 @@ public class Diary implements Serializable{
     public Diary() {
         creationDate = new Date();
     }
+    public Diary(Date date) {
+        creationDate = date;
+    }
 
     public int getId() {
         return id;

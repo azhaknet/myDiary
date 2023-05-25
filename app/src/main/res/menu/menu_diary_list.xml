@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_settings"
-        android:icon="@android:drawable/ic_menu_search"
+        android:id="@+id/action_search"
+        android:icon="@drawable/search"
         android:title="Settings"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_add_diary"
-        android:icon="@android:drawable/ic_menu_add"
+        android:icon="@drawable/add"
         android:title="Add diary"
         app:showAsAction="ifRoom" />
     <item

@@ -6,7 +6,6 @@
         android:name="android.hardware.camera"
         android:required="false" />
 
-
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
@@ -35,6 +34,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyDiary"
         tools:targetApi="31">
+        <activity
+            android:name=".StatisticActivity"
+            android:exported="false" />
 
         <provider
             android:name=".utils.MyFileProvider"
@@ -45,10 +47,11 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
         <activity
             android:name=".RecordActivity"
             android:exported="false"
-            android:screenOrientation="sensorPortrait"/>
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".SignActivity"
             android:exported="false"
@@ -56,23 +59,22 @@
         <activity
             android:name=".DiaryEditActivity"
             android:exported="false"
-            android:hardwareAccelerated="false"
             android:grantUriPermissions="true"
-            android:screenOrientation="sensorPortrait"/>
+            android:hardwareAccelerated="false"
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".DiaryDetailsActivity"
             android:exported="false"
-            android:hardwareAccelerated="false"
             android:grantUriPermissions="true"
-            android:screenOrientation="sensorPortrait"/>
+            android:hardwareAccelerated="false"
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".SearchActivity"
             android:exported="false" />
         <activity
             android:name=".DiaryListActivity"
             android:exported="false"
-            android:grantUriPermissions="true"
-            />
+            android:grantUriPermissions="true" />
         <activity
             android:name=".ForgetPassActivity"
             android:exported="false" />

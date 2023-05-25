@@ -32,6 +32,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layoutDirection="ltr"
                 android:orientation="horizontal">
 
                 <EditText
@@ -65,7 +67,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
+
                 </LinearLayout>
+                <ImageButton
+                    android:id="@+id/date_piker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/calendar_month"
+                    android:background="@drawable/back_ibtn"
+                    android:padding="@dimen/_3sdp"
+                    />
 
             </LinearLayout>
 
@@ -147,16 +158,16 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layoutDirection="ltr"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="675dp">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_8sdp"
+            android:paddingRight="@dimen/_8sdp"
             android:orientation="horizontal">
 
             <ImageButton
@@ -164,7 +175,10 @@
                 style="@android:style/Widget.Holo.ImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_3sdp"
                 android:layout_weight="1"
+                android:background="@drawable/back_ibtn"
+                android:padding="@dimen/_6sdp"
                 android:src="@drawable/text_snippet" />
 
             <ImageButton
@@ -172,6 +186,9 @@
                 style="@android:style/Widget.Holo.ImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_3sdp"
+                android:background="@drawable/back_ibtn"
+                android:padding="@dimen/_6sdp"
                 android:src="@drawable/image" />
 
             <ImageButton
@@ -179,6 +196,9 @@
                 style="@android:style/Widget.Holo.ImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_3sdp"
+                android:background="@drawable/back_ibtn"
+                android:padding="@dimen/_6sdp"
                 android:src="@drawable/ic_menu_camera" />
 
             <ImageButton
@@ -186,6 +206,9 @@
                 style="@android:style/Widget.Holo.ImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_3sdp"
+                android:background="@drawable/back_ibtn"
+                android:padding="@dimen/_6sdp"
                 android:src="@drawable/stt" />
 
             <ImageButton
@@ -193,6 +216,9 @@
                 style="@android:style/Widget.Holo.ImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_3sdp"
+                android:background="@drawable/back_ibtn"
+                android:padding="@dimen/_6sdp"
                 android:src="@drawable/voice" />
 
             <ImageButton
@@ -200,6 +226,9 @@
                 style="@android:style/Widget.Holo.ImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_3sdp"
+                android:background="@drawable/back_ibtn"
+                android:padding="@dimen/_6sdp"
                 android:src="@drawable/music" />
 
             <ImageButton
@@ -207,6 +236,9 @@
                 style="@android:style/Widget.Holo.ImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_3sdp"
+                android:background="@drawable/back_ibtn"
+                android:padding="@dimen/_6sdp"
                 android:src="@drawable/video" />
 
             <ImageButton
@@ -214,6 +246,9 @@
                 style="@android:style/Widget.Holo.ImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_3sdp"
+                android:background="@drawable/back_ibtn"
+                android:padding="@dimen/_6sdp"
                 android:src="@drawable/sign" />
 
         </LinearLayout>

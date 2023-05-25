@@ -1,6 +1,7 @@
 package ir.derasat.mydiary;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -51,6 +52,17 @@ public class DiaryDetailsActivity extends AppCompatActivity {
         deleteBtn=findViewById(R.id.button_delete);
         deleteBtn.setOnClickListener(this::onDeleteButtonClick);
         dbHelper = new DiariesDatabaseHelper(this);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
         diaryId = getIntent().getIntExtra("diaryId", -1);
         if (diaryId == -1) {

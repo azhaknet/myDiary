@@ -25,4 +25,5 @@
 
     <dimen name="default_dot_diameter">8dp</dimen>
     <dimen name="default_dot_spacing">8dp</dimen>
+    <dimen name="margin_small">5dp</dimen>
 </resources>
