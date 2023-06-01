@@ -117,6 +117,10 @@ public class DiaryListActivity extends AppCompatActivity implements SearchView.O
                 diaryList.clear();
                 diaryList.addAll(dbHelper.getAllDiaries());
                 DiaryAdapter.notifyDataSetChanged();
+                if (diaryList.isEmpty()) {
+                    Toast.makeText(DiaryListActivity.this, "No Diaries Found", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
     }

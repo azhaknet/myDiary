@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -50,6 +51,10 @@ public class StatisticActivity extends AppCompatActivity {
 
         // Retrieve list of diaries from database or wherever they are stored
         List<Diary> diaries = dbHelper.getAllDiaries();
+        if (diaries.size() == 0) {
+            Toast.makeText(this, "You Don't Have a Diary ", Toast.LENGTH_SHORT).show();
+            finish();
+        }
 
         // Create instance of DiaryStatistics and calculate statistics
         AndroidThreeTen.init(this);
@@ -564,7 +569,7 @@ public class StatisticActivity extends AppCompatActivity {
 ,"تمام"
 ,"كل"
 ,"براساس"
-              ,"تر"
+,"تر"
 ,"شدند"
 ,"ترين"
 ,"امروز"
@@ -684,7 +689,7 @@ public class StatisticActivity extends AppCompatActivity {
 ,"همواره"
 ,"گذاشته"
 ,"نداشته"
-              ,"شش"
+,"شش"
 ,"شناسي"
 ,"خواهيم"
 ,"آباد"

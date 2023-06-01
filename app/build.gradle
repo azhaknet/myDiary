@@ -30,7 +30,12 @@ android {
     }
     buildFeatures {
         viewBinding true
+        mlModelBinding true
     }
+    androidResources {
+        noCompress 'tflite'
+    }
+
 }
 
 dependencies {
@@ -52,16 +57,17 @@ dependencies {
     implementation 'com.jakewharton.threetenabp:threetenabp:1.4.6'
     implementation 'com.github.aliab:Persian-Date-Picker-Dialog:1.8.0'
 
-
     implementation 'com.kyanogen.signatureview:signature-view:1.2'
     implementation 'net.gotev:speech:1.6.2'
-    implementation 'org.parceler:parceler-api:1.1.12'
-    annotationProcessor 'org.parceler:parceler:1.1.12'
 
 
 
 
+    implementation 'org.tensorflow:tensorflow-lite:2.10.0'
 
+
+    //implementation 'org.parceler:parceler-api:1.1.12'
+    //annotationProcessor 'org.parceler:parceler:1.1.12'
 
 
 

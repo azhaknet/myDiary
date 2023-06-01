@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/splash1"
+    android:background="@mipmap/splash4"
     android:theme="@style/ThemeOverlay.MyDiary.FullscreenContainer"
     tools:context=".FullscreenActivity">
 
@@ -13,7 +13,7 @@
         android:id="@+id/versionT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="32dp"
         android:text="v1.0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,8 +23,8 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="خاطره هات رو ماندگار کن"
+        android:layout_marginTop="8dp"
+        android:text="خاطره ها رو ماندگار کن"
         android:textSize="@dimen/_16ssp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/versionT"

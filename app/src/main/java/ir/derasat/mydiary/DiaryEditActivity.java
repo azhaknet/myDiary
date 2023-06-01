@@ -26,6 +26,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
@@ -40,6 +41,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,6 +69,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.Random;
 
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
@@ -99,6 +102,10 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
 
     private Date date;
 
+    private static final String TAG = "TextClassification";
+    private TextClassificationHelper client;
+    private TextView resultTextView;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +127,15 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
         saveBtn= findViewById(R.id.button_save);
         saveBtn.setOnClickListener(this::onSaveButtonClick);
         dbHelper = new DiariesDatabaseHelper(this);
+
+
+
+        Log.v(TAG, "onCreate");
+
+        client = new TextClassificationHelper(getApplicationContext());
+        handler = new Handler();
+
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -695,6 +711,10 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
                                     contentsEditView.removeView(v);
                                 }
                             }
+                            if (keyCode==KeyEvent.KEYCODE_ENTER) {
+                                resultTextView = new TextView(contentsEditView.getContext());
+                                classify(et.getText().toString());
+                            }
                             return false;
                         }
                     });
@@ -716,6 +736,76 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
                     Gravity.BOTTOM | Gravity.CENTER));
         }
     }
+
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.v(TAG, "onStart");
+        handler.post(
+                () -> {
+                    client.load();
+                });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.v(TAG, "onStop");
+        handler.post(
+                () -> {
+                    client.unload();
+                });
+    }
+
+    /** Send input text to TextClassificationClient and get the classify messages. */
+    private void classify(final String text) {
+        handler.post(
+                () -> {
+                    // Run text classification with TF Lite.
+                    List<TextClassificationHelper.Result> results = client.classify(text);
+
+                    // Show classification result on screen
+                    showResult(text, results);
+                });
+    }
+
+    /** Show classification result on the screen. */
+    private void showResult(final String inputText, final List<TextClassificationHelper.Result> results) {
+        // Run on UI thread as we'll updating our app UI
+        runOnUiThread(
+                () -> {
+                    if (lastSent!=0) {
+                        contentsEditView.removeViewAt(lastSent);
+                    }
+                    /*String textToShow = "Input: " + inputText + "\nOutput:\n";
+                    for (int i = 0; i < results.size(); i++) {
+                        TextClassificationHelper.Result result = results.get(i);
+                        textToShow +=
+                                String.format("    %s: %s\n", result.getTitle(), result.getConfidence());
+                    }
+                    textToShow += "---------\n";*/
+
+                    // Append the result to the UI.
+                    resultTextView.setText(results.get(0).getTitle()+": "+results.get(0).getConfidence());
+
+
+                    // Clear the input text.
+                    //inputEditText.getText().clear();
+
+                    if (!resultTextView.getText().equals("")) {
+                        contentsEditView.addView(resultTextView);
+                        lastSent = contentsEditView.getChildCount() - 1;
+                    }
+                    // Scroll to the bottom to show latest entry's classification result.
+                    //scrollView.post(() -> scrollView.fullScroll(View.FOCUS_DOWN));
+                });
+    }
+    int lastSent=0;
+
+
+
     public Uri saveBitmapToCache(Bitmap bitmap, String baseFileName) {
         // Get reference to the cache directory
         File cacheDir = getCacheDir();
@@ -795,6 +885,10 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
                         contentsEditView.removeView(v);
                     }
                 }
+                if (keyCode==KeyEvent.KEYCODE_ENTER) {
+                    resultTextView = new TextView(contentsEditView.getContext());
+                    classify(ET.getText().toString());
+                }
                 return false;
             }
         });
@@ -807,6 +901,7 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
                 ViewGroup.LayoutParams.WRAP_CONTENT));
 
         contentsEditView.addView(ET);
+
         ET.requestFocus();
     }
     private static final int PICK_IMAGE_REQUEST_CODE = 1;
@@ -1007,7 +1102,7 @@ public class DiaryEditActivity extends AppCompatActivity implements SpeechDelega
 
             }
         } else {
-            Toast.makeText(this, "Cannot access media files without permission", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Cannot access media files without permission", Toast.LENGTH_SHORT).show();
         }
     }
     private void onSetSpeechToTextLanguage() {

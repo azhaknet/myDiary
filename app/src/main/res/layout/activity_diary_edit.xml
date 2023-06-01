@@ -138,7 +138,7 @@
             android:id="@+id/tempTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text=" " />
 
         <net.gotev.speech.ui.SpeechProgressView
             android:id="@+id/speechView"

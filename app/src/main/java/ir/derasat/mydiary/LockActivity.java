@@ -116,7 +116,7 @@ public class LockActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String inputP=passwedit.getText().toString();
                 if (finalCorrectPass.equals(encryptPass(inputP))){
-                    Toast.makeText(LockActivity.this, "password correct", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LockActivity.this, "password correct", Toast.LENGTH_SHORT).show();
                     unlockApp();
                 }else {
                     Toast.makeText(LockActivity.this, "password incorrect", Toast.LENGTH_SHORT).show();
@@ -144,7 +144,7 @@ public class LockActivity extends AppCompatActivity {
             public void onComplete(List<PatternLockView.Dot> pattern) {
                 if (finalCorrectPass.equals(PatternLockUtils.patternToSha256(patternLockView,pattern))){
                     patternLockView.setViewMode(PatternLockView.PatternViewMode.CORRECT);
-                    Toast.makeText(LockActivity.this, "password correct", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LockActivity.this, "password correct", Toast.LENGTH_SHORT).show();
                     unlockApp();
                 }else {
                     patternLockView.setViewMode(PatternLockView.PatternViewMode.WRONG);
@@ -165,7 +165,7 @@ public class LockActivity extends AppCompatActivity {
             public void onComplete(String pin) {
                 Log.d(TAG, "Pin complete: " + pin);
                 if (finalCorrectPass.equals(encryptPass(pin))){
-                    Toast.makeText(LockActivity.this, "password correct", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LockActivity.this, "password correct", Toast.LENGTH_SHORT).show();
                     unlockApp();
                 }else {
                     pinLockView.resetPinLockView();
