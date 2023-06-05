@@ -1,5 +1,9 @@
 # myDiary
-a simple android diary app that support text, image, signature, audio and video in digital diary with security lock system, encrypted backup and recovery, statistics and semantic analysis
+a simple android diary app that support text, image, signature, audio and video in digital diary with following features:
+
+-security lock system
+-encrypted backup and recovery
+-statistics and sentiment analysis
 
 Introducing a comprehensive diary app for Android that lets you capture and save your memories in a variety of formats. With this feature-rich app, you can add text, images, signatures, audio, and video to your diary entries, allowing you to express yourself in whichever way you prefer.
 
